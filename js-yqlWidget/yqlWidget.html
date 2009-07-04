@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+   <title>yqlWidget</title>
+   <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+   <style>
+    html,body{background:#369;color:#000;font-family: arial,sans-serif,tohama}
+
+    #hd h1{color:#fff;text-decoration: none;font-size: 30px;padding: 10px 10px 10px 0px;font-weight: bold} 
+
+    #bd{background:#fff;border:1em solid #fff;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;}
+
+    div.imgCnt{ border: 1px solid rgb(96, 96, 96); margin: 5px 5px 5px 0pt; float: left; background-color: rgb(241, 241, 241); }
+
+    div.imgCnt img{ border:0; margin:5px; }
+
+    h2{font-weight: bold;font-size: 20px}
+
+    em {font-style: oblique}
+
+    #ft {color: #ccc;font-size: 12px;margin: 4px;text-align: right}
+
+    #ft a{color: #fff}
+   </style>
+
+</head>
+<body>
+<div id="doc" class="yui-t7">
+   <div id="hd" role="banner"><h1>Coupling YUI and YQL to Build Dynamic Widgets</h1></div>
+   <div id="bd" role="main">
+	<div class="yui-g">
+
+                  <h2>select * from ip.location where ip="209.131.62.113"</h2>
+                  <div id="widgetContainer1">ip.location</div><hr/>
+                  <h2>select * from twitter.user.status where id="phploveme"</h2>
+                  <div id="widgetContainer2">twitter tweets</div><hr/>
+                  <h2>select * from weather.forecast where location=90210</h2>
+                  <div id="widgetContainer3">weather</div><hr/>
+                  <h2>select * from github.user.repos where id="thinkphp"</h2>
+                  <div id="widgetContainer4">gitHub repositories</div><hr/>
+                  <h2>select * from slideshare.transcript where url="http://www.slideshare.net/cheilmann/fuel-for-a-great-web-experience"</h2>
+                  <div id="widgetContainer5">slideshare transcript</div><hr/>
+                  <h2>select * from flickr.photos.search where text="ydn"</h2>
+                  <div id="widgetContainer6">flickr photos</div><hr style='clear:both'>
+                  <h2>select title,abstract from search.news where query="yahoo"</h2>
+                  <div id="widgetContainer7">boss news</div><hr/>
+                  <h2>select * from microsoft.bing.news where query="yahoo"</h2>
+                  <div id="widgetContainer8">bing news</div><hr/>
+                  <h2>select * from delicious.feeds.popular</h2>
+                  <div id="widgetContainer9">most popular del.icio.us</div>
+	</div>
+
+	</div>
+   <div id="ft" role="contentinfo"><p>written by <a href="http://thinkphp.ro">Adrian Statescu</a></p></div>
+</div>
+<script type="text/javascript" src="yqlWidget.js"></script>
+<script type="text/javascript">
+
+          var config = {'debug' : true};
+
+          //ip.location
+          var format1 = '<div><span>ip: {Ip}</span><br/><span>Country Code: {CountryCode}</span><br/><span>Country Name: {CountryName}</span><br/><span>Region Name: {RegionName}</span><br/><span>Latitude: {Latitude}</span><br/><span>Longitude: {Longitude}</span></div>';
+
+          var yqlQuery1 = 'select * from ip.location where ip="209.131.62.113"';
+
+          var insertEl1 = 'widgetContainer1';
+
+          //twitter
+          var format2 = '<div><span>{content}</span><br/></div>';
+
+          var yqlQuery2 = 'select * from twitter.user.status where id="phploveme"';
+
+          var insertEl2 = 'widgetContainer2';
+
+          //weather
+          var format3 = '<div><span>{item.description}</span><br/></div>';
+
+          var yqlQuery3 = 'select * from weather.forecast where location=90210';
+
+          var insertEl3 = 'widgetContainer3';
+
+          //gitHub
+          var format4 = '<div><span><strong>{name}</strong></span> - <span><em>{description}</em></span><br/></div>';
+          var yqlQuery4 = 'select * from github.user.repos where id="thinkphp"';
+          var insertEl4 = 'widgetContainer4';
+
+          //slideshare
+          var format5 = '<div><span>{p}</span><br/></div>';
+          var yqlQuery5 = 'select * from slideshare.transcript where url="http://www.slideshare.net/cheilmann/fuel-for-a-great-web-experience"';
+          var insertEl5 = 'widgetContainer5';
+
+          //flickr
+          var format6 = '<div class="imgCnt"><a href="http://www.flickr.com/photos/{owner}/{id}/" target="_blank"><img src="http://farm3.static.flickr.com/{server}/{id}_{secret}.jpg?v=0" width="80" height="80" /></a></div>';
+          var yqlQuery6 = 'select * from flickr.photos.search where text="ydn"';
+          var insertEl6 = 'widgetContainer6';
+
+          //search news
+          var format7 = '<div><em>{title}</em></div>';
+          var yqlQuery7 = 'select title,abstract from search.news where query="yahoo"';
+          var insertEl7 = 'widgetContainer7';
+
+          //bing search (Microsoft)
+          var format8 = '<div><strong>{Title}</strong> <em>{Date}</em></div>';
+          var yqlQuery8 = 'select * from microsoft.bing.news where query="yahoo"';
+          var insertEl8 = 'widgetContainer8';
+
+          //bing search (del.icio.us)
+          var format9 = '<div><a href="{link}">{title}</a></div>';
+          var yqlQuery9 = 'select * from delicious.feeds.popular';
+          var insertEl9 = 'widgetContainer9';
+
+              yqlWidget.push(yqlQuery1,config,format1,insertEl1);
+              yqlWidget.push(yqlQuery2,config,format2,insertEl2);
+              yqlWidget.push(yqlQuery3,config,format3,insertEl3);
+              yqlWidget.push(yqlQuery4,config,format4,insertEl4,'repositories.repository');
+              yqlWidget.push(yqlQuery5,config,format5,insertEl5,'item.transcript.ol.li');
+              yqlWidget.push(yqlQuery6,config,format6,insertEl6);
+              yqlWidget.push(yqlQuery7,config,format7,insertEl7);
+              yqlWidget.push(yqlQuery8,config,format8,insertEl8);
+              yqlWidget.push(yqlQuery9,config,format9,insertEl9);
+              yqlWidget.render();
+</script>
+</body>
+</html>
+

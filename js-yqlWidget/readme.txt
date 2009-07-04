@@ -30,7 +30,7 @@ Line 2: Create the container the you would like to drop the widget into (must ha
 
 Line 4: Optional Define the config object. This object has the following available key / value pairs: 
 
-        debug (true / false) – If set to true, status messages will be displayed via console.log during widget rendering
+        debug (true / false) - If set to true, status messages will be displayed via console.log during widget rendering
 
 Line 5: 
 
@@ -49,9 +49,9 @@ Line 8:
         Push the widget on the stack. If you have multiple widgets to be rendered, you would push each widget on the load stack using push before rendering (as seen on line 9). The push function accepts the following parameters:
 
         <ul>
-            <li>YQL Query (REQUIRED) – The query defined on line 6</li>   
-            <li>Config (OPTIONAL) – The config object defined on line 4</li>
-            <li>Format (REQUIRED) – The content to add for each result into the container defined</li>
+            <li>YQL Query (REQUIRED) - The query defined on line 6</li>   
+            <li>Config (OPTIONAL) - The config object defined on line 4</li>
+            <li>Format (REQUIRED) - The content to add for each result into the container defined</li>
             <li>Insert Element (REQUIRED) – The id of the container to insert the widget into</li>
         </ul>
 

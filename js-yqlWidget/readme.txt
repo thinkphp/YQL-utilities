@@ -15,8 +15,8 @@ he HTML file displays sample methods for initializing and rendering a YQL widget
 2.  <div id="widgetContainer"></div>
 3.  <script type="text/javascript">
 4.  var config = {'debug' : true};
-5.  var format = '<br style="clear:both" />{item.description}';
-6.  var yqlQuery = 'select * from weather.forecast where location = 90210';
+5   var format4 = '<div><span><strong>{name}</strong></span> - <span><em>{description}</em></span><br/></div>';
+6.  var yqlQuery = 'select * from github.user.repos where id="thinkphp"';
 7.  var insertEl = 'widgetContainer';
 8.  yqlWidget.push(yqlQuery, config, format, insertEl);
 9.  yqlWidget.render();

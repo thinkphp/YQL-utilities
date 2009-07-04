@@ -64,3 +64,5 @@ Line 9:
 Line 10: 
 
        End code javascript
+
+Check this out: http://thinkphp.ro/apps/YQL/yqlWidget/js-yqlWidget/yqlWidget.html

@@ -1,3 +1,3 @@
 The widgets contained in this project are intended to be used for the integration of YQL obtained data on an external website. This project contains the following modules for free use and contribution
-1)js-yql-display – JavaScript widget to display any public YQL data
-2)php-yql-display – JavaScript / PHP widget to display private update streams (such as profile updates / badge details from profiles.yahoo.com)
+1)js-yql-display - JavaScript widget to display any public YQL data
+2)php-yql-display - JavaScript / PHP widget to display private update streams (such as profile updates / badge details from profiles.yahoo.com)

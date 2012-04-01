@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+   <title>Last.fm Badge using using Request.YQL</title>
+   <link rel="stylesheet" type="text/css" href="lastfm.css" />
+   <style type="text/css">
+ h1,h2,h3,body { font-family:'gill sans','dejavu sans',verdana,sans-serif; }
+   h1 {
+      font-weight:bold;
+      font-size:35px;
+      letter-spacing: 2px;
+      color:#000;
+      margin-bottom:0;
+      position:relative;    
+    }
+    h1 b {
+      color:#ccc;
+      font-size: 40px
+    }
+   </style> 
+</head>
+<body>
+<h1><b>|</b>Last.fm Widget using Request.YQL</h1>
+<pre><code>
+<b>Description:</b>
+A simple MooTools Plugin that queries Yahoo's YQL, fetch the results through JSONP, and calls 
+success callback with the results.
+
+<b>Syntax:</b>
+new Request.YQL(yql, callback, vars)
+
+<b>Explanation:</b>
+Request.YQL automatically handles variables replacement with the query, so if
+you use a query that look like this:
+
+"select * from table where some_field=#{foo} and another_field=#{moo}"
+with the object:
+
+{
+  'foo': 'asd',
+  'moo': '1234567'
+}
+
+the query above will becomes this:
+'select * from table where some_field="asd"  and another_field=1234567'
+
+"@" variables
+Works in the same way of the #{variable}
+"select * from table where some_field=@var1 and another_field=@var2"
+</code></pre>
+<div class="lastFM">
+<div class="lastFMHeader">Recent Tracks</div>
+<div id="result" class="lastFMBody recenttracks">Loading...</div>
+</div>
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type="text/javascript">google.load("mootools", "1.4");</script>
+   <script type="text/javascript" src="Request.JSONP.js"></script>
+   <script type="text/javascript" src="Request.YQL.js"></script>
+   <script type="text/javascript">
+     (function(){
+         var url = 'use "http://thinkphp.ro/apps/lastfm/YQL-open-data-table/recentlastfm.xml" as lastfm; select * from lastfm where username=#{username} and api_key=@api'
+         new Request.YQL(url, {
+             onSuccess: function(data){
+                     $('result').set('html', data.query.results.result)
+             }},
+             {'username': 'olivboy','api': '2993c6e15c91a2890c2f11fa95673067'}
+         ).send();
+     })(document.id);
+   </script>
+<pre><code>
+    var url = 'use "http://thinkphp.ro/apps/lastfm/YQL-open-data-table/recentlastfm.xml" as lastfm; select * from lastfm where username=#{username} and api_key=@api'
+    new Request.YQL(url, {
+         onSuccess: function(data){
+                     $('result').set('html', data.query.results.result)
+         }},
+         {'username': 'asd','api': '2993c6e15c91a2890c2f11fa95673067'}
+    ).send();
+
+</code></pre>
+<div id="ft"><p>Created by <a href="http://thinkphp.ro/+">google+</a>| using <a href="http://thinkphp.ro/apps/lastfm/YQL-open-data-table/recentlastfm.xml">Open Data Table</a></p></div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+   <title>Last.fm Badge using YQL Open Data Table and Plugin jQuery.yql</title>
+   <link rel="stylesheet" type="text/css" href="lastfm.css" />
+   <style type="text/css">
+ h1,h2,h3,body { font-family:'gill sans','dejavu sans',verdana,sans-serif; }
+   h1 {
+      font-weight:bold;
+      font-size:35px;
+      letter-spacing: 2px;
+      color:#000;
+      margin-bottom:0;
+      position:relative;    
+    }
+    h1 b {
+      color:#ccc;
+      font-size: 40px
+    }
+   </style> 
+</head>
+<body>
+<h1><b>|</b>Last.fm Widget base on jQuery.yql Plugin</h1>
+<div class="lastFM">
+<div class="lastFMHeader">Recent Tracks</div>
+<div id="result" class="lastFMBody recenttracks">Loading...</div>
+</div>
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type="text/javascript">google.load("jquery", "1.7.1");</script>
+   <script type="text/javascript" src="jQuery.yql.js"></script>
+   <script type="text/javascript">
+
+         var url = 'use "http://thinkphp.ro/apps/lastfm/YQL-open-data-table/recentlastfm.xml" as lastfm; select * from lastfm where username=#{username} and api_key=#{api}'
+
+         $(function(){
+
+             $.yql(url, 
+
+             {username: 'asd', api: '2993c6e15c91a2890c2f11fa95673067'},
+
+             function(data){
+                  document.getElementById('result').innerHTML = data.query.results.result
+             })
+         }) 
+
+   </script>
+<pre><code>
+     var url = 'use "http://thinkphp.ro/apps/lastfm/YQL-open-data-table/recentlastfm.xml" as lastfm; select * from lastfm where username=#{username} and api_key=@{api}'
+
+     $(function(){
+
+             $.yql(url, 
+
+             {username: 'asd', api: '2993c6e15c91a2890c2f11fa95673067'},
+
+             function(data){
+                  document.getElementById('result').innerHTML = data.query.results.result
+             })
+    }) 
+</code></pre>
+<div id="ft"><p>Created by <a href="http://thinkphp.ro/+">google+</a>| using <a href="http://thinkphp.ro/apps/lastfm/YQL-open-data-table/recentlastfm.xml">Open Data Table</a></p></div>
+</body>
+</html>

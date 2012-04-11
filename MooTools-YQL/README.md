@@ -1,6 +1,7 @@
 Request.YQL
 -----------
 
+
 ###Description:
 A simple MooTools Plugin that queries Yahoo's YQL, fetch the results through JSONP, and calls 
 success callback with the results.

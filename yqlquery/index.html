@@ -18,17 +18,28 @@
       color:#ccc;
       font-size: 40px
     }
+
+    #flickr ul{width: 400px;}
+    #flickr  ul li{display: inline;}
+    #flickr  h1{font-size: 30px;margin: 10px}
    </style> 
 </head>
 <body>
 <h1><b>|</b>Last.fm Badge using YQL ODT and YQLQuery </h1>
+
 <div class="lastFM">
 <div class="lastFMHeader">Recent Tracks</div>
 <div id="result" class="lastFMBody recenttracks">Loading...</div>
 </div>
+
+<h1><b>|</b>Get Photos Search</h1>
+<div id="flickr"></div>
+
+   <script type="text/javascript">!function(win){var template = function(tmp,o){ return tmp.replace((RegExp("{([^{}]*)}","gi")), function(tag,p){return o[p];});};win['template'] = template;}(this);</script>
    <script type="text/javascript" src="yqlquery.js"></script>
    <script type="text/javascript">
 
+         //get lastfm
          var username = 'yelf';
  
          function callback(data) {
@@ -39,7 +50,46 @@
 
          new YQLQuery(yql,callback).fetch()
 
+        //get flickr photos search
+        var $ = function(id) {return document.getElementById(id);},
+            tpl = "<li><a href='http://www.flickr.com/photos/{owner}/{id}' target='_blank'><img src='http://farm{farm}.static.flickr.com/{server}/{id}_{secret}.jpg' alt='{title}' width='75' height='75'/></a></li>",
+            flickryql = "select * from flickr.photos.search where has_geo='true' and text='san francisco' and api_key='e407090ddb7d7c7c36e0a0474289ec74'"
+
+         new YQLQuery(flickryql, function(data){
+
+                      var photos = data.query.results.photo,
+                          n = photos.length;
+
+                      var out = '<ul>';
+
+                      for(var i=0; i<n; i++) {
+
+                          out += template(tpl,photos[i])
+                      }  
+
+                      out += '</ul>';
+                      $('flickr').innerHTML = out;  
+         }).fetch();
+
    </script>
+<pre><code>
+   new YQLQuery("select * from flickr.photos.search where has_geo='true' and text='san francisco' and api_key='your-api-key'",
+   
+                   /*callback function success*/
+                   function(data){
+
+                      var photos = data.query.results.photo,
+                          n = photos.length;
+                      var out = '< ul >';
+                      for(var i=0; i < n; i++) {
+                          out += template(tpl,photos[i])
+                      }  
+                      out += '< / ul >';
+                      $('flickr').innerHTML = out; 
+
+                  }//end callback
+   ).fetch();
+</code></pre>
 <div id="ft"><p>Created by <a href="http://thinkphp.ro/+">google+</a>| using <a href="http://thinkphp.ro/apps/lastfm/YQL-open-data-table/recentlastfm.xml">Open Data Table</a></p></div>
 </body>
 </html>
